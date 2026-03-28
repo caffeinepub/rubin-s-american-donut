@@ -1,0 +1,58 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=Figtree:wght@400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 1rem;
+
+    /* Brand colors */
+    --brand-pink: 0.62 0.22 355;
+    --brand-teal: 0.67 0.11 186;
+    --brand-yellow: 0.83 0.16 85;
+    --brand-soft-pink: 0.93 0.04 355;
+
+    /* Semantic */
+    --background: 1 0 0;
+    --foreground: 0.15 0 0;
+    --card: 1 0 0;
+    --card-foreground: 0.15 0 0;
+    --popover: 1 0 0;
+    --popover-foreground: 0.15 0 0;
+    --primary: 0.62 0.22 355;
+    --primary-foreground: 1 0 0;
+    --secondary: 0.67 0.11 186;
+    --secondary-foreground: 1 0 0;
+    --muted: 0.97 0 0;
+    --muted-foreground: 0.55 0 0;
+    --accent: 0.83 0.16 85;
+    --accent-foreground: 0.15 0 0;
+    --destructive: 0.577 0.245 27.325;
+    --destructive-foreground: 1 0 0;
+    --border: 0.92 0 0;
+    --input: 0.92 0 0;
+    --ring: 0.62 0.22 355;
+    --chart-1: 0.62 0.22 355;
+    --chart-2: 0.67 0.11 186;
+    --chart-3: 0.83 0.16 85;
+    --chart-4: 0.93 0.04 355;
+    --chart-5: 0.65 0.15 30;
+    --sidebar: 1 0 0;
+    --sidebar-foreground: 0.15 0 0;
+    --sidebar-primary: 0.62 0.22 355;
+    --sidebar-primary-foreground: 1 0 0;
+    --sidebar-accent: 0.97 0 0;
+    --sidebar-accent-foreground: 0.15 0 0;
+    --sidebar-border: 0.92 0 0;
+    --sidebar-ring: 0.62 0.22 355;
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body;
+  }
+}
