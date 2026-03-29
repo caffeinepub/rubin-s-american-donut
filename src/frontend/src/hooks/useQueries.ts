@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import type { Donut } from "../backend.d";
+import type { Donut, Order } from "../backend.d";
 import { useActor } from "./useActor";
 
 export function useGetAllDonuts() {
@@ -11,6 +11,19 @@ export function useGetAllDonuts() {
       return actor.getAllDonuts();
     },
     enabled: !!actor && !isFetching,
+  });
+}
+
+export function useGetAllOrders() {
+  const { actor, isFetching } = useActor();
+  return useQuery<Order[]>({
+    queryKey: ["orders"],
+    queryFn: async () => {
+      if (!actor) return [];
+      return actor.getAllOrders();
+    },
+    enabled: !!actor && !isFetching,
+    refetchInterval: 30000,
   });
 }
 

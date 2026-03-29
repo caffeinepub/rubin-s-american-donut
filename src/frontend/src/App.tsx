@@ -10,6 +10,7 @@ import { useState } from "react";
 import { CartDrawer } from "./components/CartDrawer";
 import { Header } from "./components/Header";
 import { CartProvider } from "./context/CartContext";
+import { AdminPage } from "./pages/AdminPage";
 import { LandingPage } from "./pages/LandingPage";
 import { OrderPage } from "./pages/OrderPage";
 
@@ -38,8 +39,13 @@ const orderRoute = createRoute({
   path: "/order",
   component: OrderPage,
 });
+const adminRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/admin",
+  component: AdminPage,
+});
 
-const routeTree = rootRoute.addChildren([indexRoute, orderRoute]);
+const routeTree = rootRoute.addChildren([indexRoute, orderRoute, adminRoute]);
 const router = createRouter({ routeTree });
 
 declare module "@tanstack/react-router" {

@@ -16,16 +16,22 @@ export const Donut = IDL.Record({
   'category' : IDL.Text,
   'price' : IDL.Nat,
 });
+export const OrderItem = IDL.Record({
+  'donutId' : IDL.Nat,
+  'quantity' : IDL.Nat,
+});
 export const Order = IDL.Record({
   'id' : IDL.Nat,
   'customerName' : IDL.Text,
   'customerPhone' : IDL.Text,
-  'items' : IDL.Vec(IDL.Tuple(IDL.Nat, IDL.Nat)),
+  'timestamp' : IDL.Int,
+  'items' : IDL.Vec(OrderItem),
   'customerEmail' : IDL.Text,
 });
 
 export const idlService = IDL.Service({
   'getAllDonuts' : IDL.Func([], [IDL.Vec(Donut)], ['query']),
+  'getAllOrders' : IDL.Func([], [IDL.Vec(Order)], ['query']),
   'getDonutById' : IDL.Func([IDL.Nat], [Donut], ['query']),
   'getDonutsByCategory' : IDL.Func([IDL.Text], [IDL.Vec(Donut)], ['query']),
   'getOrderById' : IDL.Func([IDL.Nat], [Order], ['query']),
@@ -48,16 +54,19 @@ export const idlFactory = ({ IDL }) => {
     'category' : IDL.Text,
     'price' : IDL.Nat,
   });
+  const OrderItem = IDL.Record({ 'donutId' : IDL.Nat, 'quantity' : IDL.Nat });
   const Order = IDL.Record({
     'id' : IDL.Nat,
     'customerName' : IDL.Text,
     'customerPhone' : IDL.Text,
-    'items' : IDL.Vec(IDL.Tuple(IDL.Nat, IDL.Nat)),
+    'timestamp' : IDL.Int,
+    'items' : IDL.Vec(OrderItem),
     'customerEmail' : IDL.Text,
   });
   
   return IDL.Service({
     'getAllDonuts' : IDL.Func([], [IDL.Vec(Donut)], ['query']),
+    'getAllOrders' : IDL.Func([], [IDL.Vec(Order)], ['query']),
     'getDonutById' : IDL.Func([IDL.Nat], [Donut], ['query']),
     'getDonutsByCategory' : IDL.Func([IDL.Text], [IDL.Vec(Donut)], ['query']),
     'getOrderById' : IDL.Func([IDL.Nat], [Order], ['query']),

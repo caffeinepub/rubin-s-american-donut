@@ -2,10 +2,18 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useNavigate } from "@tanstack/react-router";
-import { ArrowRight, Clock, MapPin, Sparkles, Star } from "lucide-react";
+import {
+  ArrowRight,
+  Clock,
+  MapPin,
+  ShoppingCart,
+  Sparkles,
+  Star,
+} from "lucide-react";
 import { motion } from "motion/react";
 import { SiFacebook, SiInstagram, SiX } from "react-icons/si";
 import { DonutCard } from "../components/DonutCard";
+import { useCart } from "../context/CartContext";
 import { useGetAllDonuts } from "../hooks/useQueries";
 
 const STATIC_DONUTS = [
@@ -68,40 +76,48 @@ const STATIC_DONUTS = [
 
 const PACKS = [
   {
+    id: BigInt(101),
     name: "Party Donut Box",
     desc: "24 Donuts – Perfect for parties & celebrations",
     price: "₹1399",
+    priceNum: 1399,
     color: "bg-pink-50",
     emoji: "🎉",
   },
   {
+    id: BigInt(102),
     name: "Party Donut Box",
     desc: "50 Donuts – Ideal for large gatherings",
     price: "₹2899",
+    priceNum: 2899,
     color: "bg-amber-50",
     emoji: "🍩",
   },
   {
+    id: BigInt(103),
     name: "Mini Donut Party Pack",
     desc: "50 pcs – Perfect for birthdays & events",
     price: "₹1499",
+    priceNum: 1499,
     color: "bg-yellow-50",
     emoji: "🎂",
   },
   {
+    id: BigInt(104),
     name: "Mini Donut Party Pack",
     desc: "100 pcs – Grand celebration special",
     price: "₹2899",
+    priceNum: 2899,
     color: "bg-rose-50",
     emoji: "🎊",
   },
 ];
 
 const CAKE_TOWERS = [
-  { donuts: 12, price: "₹1399" },
-  { donuts: 18, price: "₹1999" },
-  { donuts: 24, price: "₹2499" },
-  { donuts: 45, price: "₹4499" },
+  { donuts: 12, price: "₹1399", priceNum: 1399 },
+  { donuts: 18, price: "₹1999", priceNum: 1999 },
+  { donuts: 24, price: "₹2499", priceNum: 2499 },
+  { donuts: 45, price: "₹4499", priceNum: 4499 },
 ];
 
 const CAKE_TOWER_GALLERY = [
@@ -148,6 +164,7 @@ const PROMO_IMGS = [
 export function LandingPage() {
   const { isLoading } = useGetAllDonuts();
   const navigate = useNavigate();
+  const { addToCart } = useCart();
 
   const displayDonuts = STATIC_DONUTS;
 
@@ -304,8 +321,7 @@ export function LandingPage() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08 }}
                 data-ocid={`packs.item.${i + 1}`}
-                className={`${pack.color} rounded-3xl p-8 flex flex-col items-center text-center cursor-pointer hover:scale-105 transition-transform duration-300 border border-white shadow-sm`}
-                onClick={() => navigate({ to: "/order" })}
+                className={`${pack.color} rounded-3xl p-8 flex flex-col items-center text-center hover:scale-105 transition-transform duration-300 border border-white shadow-sm`}
               >
                 <span className="text-5xl mb-4">{pack.emoji}</span>
                 <h3 className="font-display font-bold text-lg mb-2 leading-snug">
@@ -314,9 +330,28 @@ export function LandingPage() {
                 <p className="text-sm text-muted-foreground mb-4">
                   {pack.desc}
                 </p>
-                <span className="font-display font-black text-2xl text-brand-pink">
+                <span className="font-display font-black text-2xl text-brand-pink mb-4">
                   {pack.price}
                 </span>
+                <Button
+                  data-ocid={`packs.primary_button.${i + 1}`}
+                  className="w-full rounded-full font-bold text-sm"
+                  style={{ background: "#F04E8A" }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    addToCart({
+                      id: pack.id,
+                      name: pack.name,
+                      description: pack.desc,
+                      price: BigInt(pack.priceNum),
+                      category: "Pack",
+                      imageUrl: "",
+                    });
+                  }}
+                >
+                  <ShoppingCart className="w-4 h-4 mr-2" />
+                  Add to Cart
+                </Button>
               </motion.div>
             ))}
           </div>
@@ -402,8 +437,7 @@ export function LandingPage() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
                 data-ocid={`cake_tower.item.${i + 1}`}
-                className="bg-white rounded-3xl p-6 flex flex-col items-center text-center shadow-sm border border-amber-100 cursor-pointer hover:scale-105 transition-transform duration-300 hover:shadow-md"
-                onClick={() => navigate({ to: "/order" })}
+                className="bg-white rounded-3xl p-6 flex flex-col items-center text-center shadow-sm border border-amber-100 hover:scale-105 transition-transform duration-300 hover:shadow-md"
               >
                 <span className="text-4xl mb-3">🎂</span>
                 <h3 className="font-display font-black text-2xl text-foreground mb-1">
@@ -419,12 +453,20 @@ export function LandingPage() {
                   data-ocid={`cake_tower.primary_button.${i + 1}`}
                   onClick={(e) => {
                     e.stopPropagation();
-                    navigate({ to: "/order" });
+                    addToCart({
+                      id: BigInt(200 + i + 1),
+                      name: `Donut Cake Tower – ${tier.donuts} Donuts`,
+                      description: `Donut Cake Tower with ${tier.donuts} donuts, customized with name & theme`,
+                      price: BigInt(tier.priceNum),
+                      category: "Cake Tower",
+                      imageUrl: "",
+                    });
                   }}
                   className="w-full rounded-full text-sm font-bold"
                   style={{ background: "#F04E8A" }}
                 >
-                  Order Now
+                  <ShoppingCart className="w-4 h-4 mr-2" />
+                  Add to Cart
                 </Button>
               </motion.div>
             ))}

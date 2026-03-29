@@ -22,11 +22,14 @@ export interface Order {
   'id' : bigint,
   'customerName' : string,
   'customerPhone' : string,
-  'items' : Array<[bigint, bigint]>,
+  'timestamp' : bigint,
+  'items' : Array<OrderItem>,
   'customerEmail' : string,
 }
+export interface OrderItem { 'donutId' : bigint, 'quantity' : bigint }
 export interface _SERVICE {
   'getAllDonuts' : ActorMethod<[], Array<Donut>>,
+  'getAllOrders' : ActorMethod<[], Array<Order>>,
   'getDonutById' : ActorMethod<[bigint], Donut>,
   'getDonutsByCategory' : ActorMethod<[string], Array<Donut>>,
   'getOrderById' : ActorMethod<[bigint], Order>,
