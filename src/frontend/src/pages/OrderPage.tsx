@@ -21,7 +21,7 @@ export function OrderPage() {
   const [orderId, setOrderId] = useState<bigint | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const total = subtotal / 100 + (items.length > 0 ? DELIVERY_FEE : 0);
+  const total = subtotal + (items.length > 0 ? DELIVERY_FEE : 0);
 
   const validate = () => {
     const errs: Record<string, string> = {};
@@ -162,10 +162,9 @@ export function OrderPage() {
                       <div className="text-right">
                         <p className="font-bold text-brand-pink">
                           ₹
-                          {(
-                            (Number(item.donut.price) * item.quantity) /
-                            100
-                          ).toFixed(2)}
+                          {(Number(item.donut.price) * item.quantity).toFixed(
+                            2,
+                          )}
                         </p>
                         <p className="text-sm text-muted-foreground">
                           ×{item.quantity}
@@ -177,7 +176,7 @@ export function OrderPage() {
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
                       <span className="text-muted-foreground">Subtotal</span>
-                      <span>₹{(subtotal / 100).toFixed(2)}</span>
+                      <span>₹{subtotal.toFixed(2)}</span>
                     </div>
                     <div className="flex justify-between text-sm">
                       <span className="text-muted-foreground">Delivery</span>

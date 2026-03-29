@@ -56,7 +56,7 @@ export function DonutCard({ donut, index }: DonutCardProps) {
         </p>
         <div className="flex items-center justify-between">
           <span className="font-display font-bold text-2xl text-brand-pink">
-            ₹{(Number(donut.price) / 100).toFixed(2)}
+            ₹{Number(donut.price).toFixed(2)}
           </span>
           <Button
             data-ocid={`menu.item.${index + 1}`}

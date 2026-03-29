@@ -18,7 +18,7 @@ export function CartDrawer({ open, onClose }: CartDrawerProps) {
     useCart();
   const navigate = useNavigate();
 
-  const total = subtotal / 100 + (items.length > 0 ? DELIVERY_FEE : 0);
+  const total = subtotal + (items.length > 0 ? DELIVERY_FEE : 0);
 
   const handleCheckout = () => {
     onClose();
@@ -94,7 +94,7 @@ export function CartDrawer({ open, onClose }: CartDrawerProps) {
                         {item.donut.name}
                       </p>
                       <p className="text-brand-pink text-sm font-bold">
-                        ₹{(Number(item.donut.price) / 100).toFixed(2)}
+                        ₹{Number(item.donut.price).toFixed(2)}
                       </p>
                     </div>
                     <div className="flex items-center gap-1">
@@ -137,9 +137,7 @@ export function CartDrawer({ open, onClose }: CartDrawerProps) {
               <div className="p-5 border-t space-y-3">
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">Subtotal</span>
-                  <span className="font-medium">
-                    ₹{(subtotal / 100).toFixed(2)}
-                  </span>
+                  <span className="font-medium">₹{subtotal.toFixed(2)}</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">Delivery</span>

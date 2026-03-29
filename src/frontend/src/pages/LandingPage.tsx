@@ -14,7 +14,7 @@ const STATIC_DONUTS = [
     name: "Strawberry Dream",
     description:
       "Fluffy ring donut glazed with fresh strawberry frosting and heart-shaped sprinkles",
-    price: BigInt(349),
+    price: BigInt(80),
     category: "Fruit",
     imageUrl: "/assets/generated/donut-strawberry.dim_400x400.png",
   },
@@ -23,7 +23,7 @@ const STATIC_DONUTS = [
     name: "Midnight Chocolate",
     description:
       "Rich dark chocolate glaze with crushed hazelnuts and a cocoa dusting",
-    price: BigInt(399),
+    price: BigInt(80),
     category: "Chocolate",
     imageUrl: "",
   },
@@ -41,7 +41,7 @@ const STATIC_DONUTS = [
     name: "Milk Chocolate Bliss",
     description:
       "Smooth milk chocolate glaze drizzled over a soft ring donut with a rich creamy finish",
-    price: BigInt(429),
+    price: BigInt(80),
     category: "Filled",
     imageUrl:
       "/assets/uploads/image-019d3542-7e0a-759a-a03e-55e2f004f760-1.png",
@@ -51,7 +51,7 @@ const STATIC_DONUTS = [
     name: "White Chocolate Dream",
     description:
       "Velvety white chocolate glaze over a soft pillowy donut with a delicate sweet finish",
-    price: BigInt(389),
+    price: BigInt(80),
     category: "White Chocolate",
     imageUrl: "/assets/generated/white-chocolate-donut-transparent.png",
   },
@@ -59,7 +59,7 @@ const STATIC_DONUTS = [
     id: BigInt(8),
     name: "Pineapple Glazed",
     description: "Tropical pineapple glazed donut with a bright, fruity finish",
-    price: BigInt(369),
+    price: BigInt(80),
     category: "Fruit",
     imageUrl:
       "/assets/uploads/image-019d3546-83cb-72d5-a006-2a541453dabd-1.png",
