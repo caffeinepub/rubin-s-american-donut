@@ -29,8 +29,7 @@ const STATIC_DONUTS = [
   {
     id: BigInt(2),
     name: "Midnight Chocolate",
-    description:
-      "Rich dark chocolate glaze with crushed hazelnuts and a cocoa dusting",
+    description: "Rich dark chocolate glaze with chocolate sprinkle",
     price: BigInt(80),
     category: "Chocolate",
     imageUrl: "",
