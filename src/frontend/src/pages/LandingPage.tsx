@@ -21,10 +21,10 @@ const STATIC_DONUTS = [
     id: BigInt(1),
     name: "Strawberry Dream",
     description:
-      "Fluffy ring donut glazed with fresh strawberry frosting and heart-shaped sprinkles",
+      "Fluffy ring donut glazed with fresh strawberry frosting and rainbow sprinkles",
     price: BigInt(80),
     category: "Fruit",
-    imageUrl: "/assets/generated/donut-strawberry.dim_400x400.png",
+    imageUrl: "/assets/generated/donut-strawberry-rainbow.dim_400x400.png",
   },
   {
     id: BigInt(2),
