@@ -73,6 +73,39 @@ const STATIC_DONUTS = [
   },
 ];
 
+const EVENTS = [
+  {
+    emoji: "💍",
+    name: "Wedding",
+    tagline: "Make your big day even sweeter",
+  },
+  {
+    emoji: "💕",
+    name: "Engagement",
+    tagline: "Celebrate love with every bite",
+  },
+  {
+    emoji: "🏢",
+    name: "Corporate Party",
+    tagline: "Impress your team & clients",
+  },
+  {
+    emoji: "🥂",
+    name: "Small Gathering",
+    tagline: "Perfect for intimate celebrations",
+  },
+  {
+    emoji: "🏠",
+    name: "House Parties",
+    tagline: "Because home parties deserve great donuts",
+  },
+  {
+    emoji: "👑",
+    name: "Kitty Parties",
+    tagline: "Delight your friends & guests",
+  },
+];
+
 const PACKS = [
   {
     id: BigInt(101),
@@ -160,6 +193,12 @@ const PROMO_IMGS = [
   "/assets/generated/donut-strawberry-sprinkle.dim_400x400.png",
 ];
 
+function scrollToPopularPacks() {
+  document
+    .getElementById("popular-packs")
+    ?.scrollIntoView({ behavior: "smooth" });
+}
+
 export function LandingPage() {
   const { isLoading } = useGetAllDonuts();
   const navigate = useNavigate();
@@ -236,8 +275,57 @@ export function LandingPage() {
         </div>
       </section>
 
-      {/* Menu */}
-      <section id="menu" className="py-16 bg-white">
+      {/* Shop by Event */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="mb-10 text-center"
+          >
+            <p className="text-brand-pink font-bold text-sm tracking-widest uppercase mb-1">
+              We cater to every celebration
+            </p>
+            <h2 className="font-display font-black text-4xl sm:text-5xl text-foreground">
+              Shop by Event
+            </h2>
+          </motion.div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+            {EVENTS.map((event, i) => (
+              <motion.button
+                key={event.name}
+                data-ocid={`events.item.${i + 1}`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.07 }}
+                whileHover={{ y: -4, scale: 1.03 }}
+                onClick={scrollToPopularPacks}
+                className="group flex flex-col items-center text-center bg-brand-soft-pink rounded-3xl p-5 shadow-sm hover:shadow-md border border-pink-100 hover:border-brand-pink/30 transition-all duration-300 cursor-pointer"
+              >
+                <span className="text-5xl mb-3 group-hover:scale-110 transition-transform duration-300 block">
+                  {event.emoji}
+                </span>
+                <h3 className="font-display font-bold text-sm text-foreground mb-1 leading-tight">
+                  {event.name}
+                </h3>
+                <p className="text-xs text-muted-foreground leading-snug">
+                  {event.tagline}
+                </p>
+                <span className="mt-3 text-xs font-bold text-brand-pink opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                  View Packs →
+                </span>
+              </motion.button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Our Flavors */}
+      <section id="menu" className="py-16 bg-muted/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
@@ -247,11 +335,15 @@ export function LandingPage() {
             className="mb-10"
           >
             <p className="text-brand-pink font-bold text-sm tracking-widest uppercase mb-1">
-              Fresh Daily
+              Available in All Our Packages
             </p>
-            <h2 className="font-display font-black text-4xl sm:text-5xl text-foreground">
-              Today's Favorites
+            <h2 className="font-display font-black text-4xl sm:text-5xl text-foreground mb-3">
+              Our Flavors
             </h2>
+            <p className="text-muted-foreground text-base max-w-xl">
+              All flavors are available across our party packages — pick any
+              flavor when placing your order.
+            </p>
           </motion.div>
           {isLoading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -281,7 +373,7 @@ export function LandingPage() {
       </section>
 
       {/* Popular Packs */}
-      <section className="py-16 bg-muted">
+      <section id="popular-packs" className="py-16 bg-muted">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, x: -20 }}

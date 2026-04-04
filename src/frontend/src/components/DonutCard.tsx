@@ -1,8 +1,5 @@
-import { Button } from "@/components/ui/button";
-import { Plus, ShoppingCart } from "lucide-react";
 import { motion } from "motion/react";
 import type { Donut } from "../backend.d";
-import { useCart } from "../context/CartContext";
 import { DonutPlaceholder } from "./DonutPlaceholder";
 
 interface DonutCardProps {
@@ -11,10 +8,6 @@ interface DonutCardProps {
 }
 
 export function DonutCard({ donut, index }: DonutCardProps) {
-  const { addToCart, items } = useCart();
-  const cartItem = items.find((i) => i.donut.id === donut.id);
-  const qty = cartItem?.quantity ?? 0;
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -58,23 +51,9 @@ export function DonutCard({ donut, index }: DonutCardProps) {
           <span className="font-display font-bold text-2xl text-brand-pink">
             ₹{Number(donut.price).toFixed(2)}
           </span>
-          <Button
-            data-ocid={`menu.item.${index + 1}`}
-            onClick={() => addToCart(donut)}
-            className="bg-brand-teal hover:bg-brand-teal/90 text-white rounded-full font-bold flex items-center gap-1.5 px-4"
-          >
-            {qty > 0 ? (
-              <>
-                <Plus className="w-4 h-4" />
-                <span>{qty} in cart</span>
-              </>
-            ) : (
-              <>
-                <ShoppingCart className="w-4 h-4" />
-                <span>Add to Cart</span>
-              </>
-            )}
-          </Button>
+          <span className="text-xs text-muted-foreground font-medium bg-white/60 px-3 py-1 rounded-full">
+            per piece
+          </span>
         </div>
       </div>
     </motion.div>
