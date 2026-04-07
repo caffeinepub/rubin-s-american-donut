@@ -11,7 +11,7 @@ import {
   Star,
 } from "lucide-react";
 import { motion } from "motion/react";
-import { SiFacebook, SiInstagram, SiX } from "react-icons/si";
+import { SiFacebook, SiInstagram, SiWhatsapp, SiX } from "react-icons/si";
 import { DonutCard } from "../components/DonutCard";
 import { useCart } from "../context/CartContext";
 import { useGetAllDonuts } from "../hooks/useQueries";
@@ -260,6 +260,43 @@ export function LandingPage() {
               </Button>
             </div>
           </motion.div>
+
+          {/* WhatsApp QR Code Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.35 }}
+            className="flex justify-center mt-10"
+          >
+            <div
+              data-ocid="hero.card"
+              className="bg-white rounded-3xl px-6 py-5 shadow-2xl flex flex-col items-center gap-3 max-w-xs w-full"
+            >
+              {/* WhatsApp badge */}
+              <div className="flex items-center gap-2 bg-[#25D366]/10 rounded-full px-3 py-1.5">
+                <SiWhatsapp className="w-4 h-4 text-[#25D366]" />
+                <span className="text-[#25D366] font-bold text-xs tracking-wide">
+                  WhatsApp
+                </span>
+              </div>
+
+              {/* QR code image */}
+              <img
+                src="/assets/uploads/brown_simple_cute_catering_logo-019d669e-5495-731d-baaa-a05b39bd47b1.png"
+                alt="WhatsApp QR Code – Scan to order"
+                className="w-44 h-44 object-contain rounded-xl"
+              />
+
+              {/* Text */}
+              <p className="font-display font-black text-gray-900 text-base leading-tight text-center">
+                Scan to Order on WhatsApp
+              </p>
+              <p className="text-xs text-gray-500 text-center leading-snug">
+                Point your camera at the QR code to chat with us directly
+              </p>
+            </div>
+          </motion.div>
+
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
